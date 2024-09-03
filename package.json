@@ -1,0 +1,30 @@
+{
+    "name": "natasha-gading-kennel",
+    "version": "1.0.0",
+    "description": "A Vue.js marketplace web app for Natasha Gading Kennel.",
+    "main": "index.js",
+    "scripts": {
+        "serve": "vue-cli-service serve",
+        "build": "vue-cli-service build",
+        "lint": "vue-cli-service lint"
+    },
+    "dependencies": {
+        "core-js": "^3.8.3",
+        "vue": "^2.6.12",
+        "vue-router": "^3.5.1"
+    },
+    "devDependencies": {
+        "@vue/cli-service": "^4.5.13",
+        "babel-eslint": "^10.1.0",
+        "eslint": "^6.7.2",
+        "eslint-plugin-vue": "^6.2.2",
+        "vue-template-compiler": "^2.6.12"
+    },
+    "browserslist": [
+        "> 1%",
+        "last 2 versions",
+        "not dead"
+    ],
+    "author": "Natasha",
+    "license": "MIT"
+}
