@@ -29,7 +29,15 @@ export default {
     },
     methods: {
         sendOTP() {
-            if (this.whatsappNumber) {
+            if (this.whatsappNumber.trim() === '') {
+                alert('Please enter your WhatsApp number');
+                return;
+            }
+
+            if (this.whatsappNumber === '000000') {
+                console.log('Ignoring fetch as WhatsApp number is 000000 (testing case)');
+                // this.nextStep();
+            } else {
                 fetch('https://api.example.com/sendOTP', {
                     method: 'POST',
                     headers: {
@@ -38,21 +46,21 @@ export default {
                     body: JSON.stringify({ phoneNumber: this.whatsappNumber }),
                 })
                     .then(response => {
-                        if (response.ok) {
+                        if (response.ok && this.whatsappNumber === '000000') {
                             console.log(`OTP sent successfully to +62${this.whatsappNumber}`);
-                            // You can add further logic here, such as showing a success message or navigating to the next step
+                            // this.nextStep();
                         } else {
                             throw new Error('Failed to send OTP');
                         }
                     })
                     .catch(error => {
                         console.error('Error sending OTP:', error);
-                        // Handle error, show error message, etc.
+                        // alert('Error sending OTP', error); // Add error as alert('')
+                        return; // Added return statement to prevent proceeding to next page
                     });
-            } else {
-                alert('Please enter your WhatsApp number');
             }
-        }
+        },
+
     }
 }
 </script>

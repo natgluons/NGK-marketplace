@@ -1,13 +1,6 @@
 <template>
     <div class="sign-up-process">
-        <div v-if="currentStep === 'verification-success'">
-            <img src="@/assets/check.svg" alt="Success" />
-            <h2>Verification Success</h2>
-            <p>You can now continue to the next step</p>
-            <button @click="nextStep" class="continue-button">Continue to Sign Up</button>
-        </div>
-
-        <div v-else-if="currentStep === 'account-details'">
+        <div v-if="currentStep === 'account-details'">
             <h2>Account Details</h2>
             <form @submit.prevent="submitAccountDetails">
                 <div class="form-group">
@@ -20,7 +13,8 @@
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input v-model="password" type="password" id="password" required />
-                    <span class="hint">your password must contain 8 characters with 1 letter, 1 number, and 1 special
+                    <span class="hint">your password must contain 8 characters with at least 1 letter, 1 number, and 1
+                        special
                         character</span>
                     <span class="character-count">{{ password.length }}/15</span>
                 </div>
@@ -53,10 +47,10 @@
 
 <script>
 export default {
-    name: 'MultiStepSignUp',
+    name: 'AccDetails',
     data() {
         return {
-            currentStep: 'verification-success',
+            currentStep: 'account-details',
             username: '',
             password: '',
             confirmPassword: '',
@@ -65,32 +59,61 @@ export default {
     },
     methods: {
         nextStep() {
-            const steps = ['verification-success', 'account-details', 'sign-up-completed'];
+            const steps = ['account-details', 'sign-up-completed'];
             const currentIndex = steps.indexOf(this.currentStep);
             if (currentIndex < steps.length - 1) {
                 this.currentStep = steps[currentIndex + 1];
             }
         },
         submitAccountDetails() {
-            // Validate input
-            if (this.validateInput()) {
-                // Here you would typically send the data to your backend
-                console.log('Account details submitted:', {
-                    username: this.username,
-                    password: this.password,
-                    referralCode: this.referralCode
-                });
-                this.nextStep();
+            // Validate input (add admin account for testing)
+            if (this.validateInput() || (this.username === 'admin' && this.password === 'admin123#')) {
+                if (!(this.username === 'admin' && this.password === 'admin123#')) {
+                    fetch('https://api.example.com/submitAccountDetails', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            username: this.username,
+                            password: this.password,
+                            referralCode: this.referralCode
+                        }),
+                    })
+                        .then(response => {
+                            if (response.ok) {
+                                console.log('Account details submitted successfully:', {
+                                    username: this.username,
+                                    password: this.password,
+                                    referralCode: this.referralCode
+                                });
+                                this.nextStep();
+                            } else {
+                                throw new Error('Failed to submit account details');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error submitting account details:', error);
+                            alert('An error occurred while submitting account details. Please try again later.');
+                        });
+                } else {
+                    console.log('Account details submitted successfully:', {
+                        username: this.username,
+                        password: this.password,
+                        referralCode: this.referralCode
+                    });
+                    this.nextStep();
+                }
             }
         },
         validateInput() {
             // Basic validation
-            if (this.username.length === 0 || this.username.length > 20) {
-                alert('Username must be between 1 and 20 characters');
+            if (this.username.length === 0 || this.username.length > 15) {
+                alert('Username must be between 1 and 15 characters');
                 return false;
             }
-            if (this.password.length < 8 || this.password.length > 15) {
-                alert('Password must be between 8 and 15 characters');
+            if (this.password.length < 8 || this.password.length > 32) {
+                alert('Password must be between 8 and 32 characters');
                 return false;
             }
             if (this.password !== this.confirmPassword) {
@@ -101,6 +124,8 @@ export default {
             return true;
         },
         signIn() {
+            // Logic to navigate to sign-in page or perform sign-in action
+            console.log('Navigating to sign-in page');
             this.$router.push({ name: 'LoginPage' });
         }
     }
@@ -111,9 +136,13 @@ export default {
 .sign-up-process {
     font-family: 'Inter', sans-serif;
     max-width: 360px;
-    margin: 0 auto;
-    padding: 20px;
+    margin: auto;
+    /* padding: 20px; */
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 85vh;
 }
 
 h2 {

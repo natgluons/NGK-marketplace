@@ -10,8 +10,8 @@ import Account from './components/Account.vue';
 import CartPage from './components/CartPage.vue';
 import LoginPage from './components/LoginPage.vue';
 import SignUp from './components/SignUp.vue';
-import OTPpage from './components/OTPpage.vue';
-import VerifyAccDetails from './components/VerifyAccDetails.vue';
+import OTPverify from './components/OTPverify.vue';
+import AccDetails from './components/AccDetails.vue';
 
 Vue.config.productionTip = false;
 
@@ -27,8 +27,8 @@ const routes = [
     { path: '/cart', name: 'Cart', component: CartPage },
     { path: '/login', name: 'LoginPage', component: LoginPage },
     { path: '/signup', name: 'SignUp', component: SignUp },
-    { path: '/otp', name: 'OTPpage', component: OTPpage },
-    { path: '/verify', name: 'VerifyAccDetails', component: VerifyAccDetails }
+    { path: '/otp', name: 'OTPverify', component: OTPverify },
+    { path: '/account-details', name: 'AccDetails', component: AccDetails }
 ];
 
 const router = new Router({

@@ -21,8 +21,13 @@
 export default {
     name: 'Header',
     methods: {
+
         goBack() {
-            this.$router.go(-1);
+            if (this.$route.name === 'AccDetails') {
+                this.$router.go(-2);
+            } else {
+                this.$router.go(-1);
+            }
         }
     },
     data() {
