@@ -30,9 +30,25 @@ export default {
     methods: {
         sendOTP() {
             if (this.whatsappNumber) {
-                // Here you would typically make an API call to send the OTP
-                console.log(`Sending OTP to +62${this.whatsappNumber}`);
-                // You can add further logic here, such as showing a success message or navigating to the next step
+                fetch('https://api.example.com/sendOTP', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ phoneNumber: this.whatsappNumber }),
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            console.log(`OTP sent successfully to +62${this.whatsappNumber}`);
+                            // You can add further logic here, such as showing a success message or navigating to the next step
+                        } else {
+                            throw new Error('Failed to send OTP');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error sending OTP:', error);
+                        // Handle error, show error message, etc.
+                    });
             } else {
                 alert('Please enter your WhatsApp number');
             }

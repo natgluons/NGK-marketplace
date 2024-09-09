@@ -32,13 +32,36 @@ export default {
             }
         },
         verifyOTP() {
-            const otp = this.otpDigits.join('');
-            if (otp.length === 6) {
-                // Here you would typically make an API call to verify the OTP
-                console.log('Verifying OTP:', otp);
-                // Handle successful verification (e.g., navigate to next step)
+            // For testing purpose, hardcode the OTP as 000000
+            const otp = '000000';
+            // Uncomment the following block to simulate API call
+            /*
+            fetch('https://api.example.com/verifyOTP', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ otp: otp }),
+            })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('OTP verified successfully:', otp);
+                        this.$router.push({ name: 'VerifyAccDetails' }); // Navigate to /verify on successful OTP verification
+                    } else {
+                        throw new Error('Failed to verify OTP');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error verifying OTP:', error);
+                    // Handle error, show error message, etc.
+                });
+            */
+            // Simulate OTP verification
+            if (this.otpDigits.join('') === otp) {
+                console.log('OTP verified successfully:', otp);
+                this.$router.push({ name: 'VerifyAccDetails' }); // Navigate to /verify on successful OTP verification
             } else {
-                alert('Please enter a complete 6-digit OTP');
+                throw new Error('Failed to verify OTP');
             }
         },
         changeNumber() {

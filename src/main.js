@@ -11,6 +11,7 @@ import CartPage from './components/CartPage.vue';
 import LoginPage from './components/LoginPage.vue';
 import SignUp from './components/SignUp.vue';
 import OTPpage from './components/OTPpage.vue';
+import VerifyAccDetails from './components/VerifyAccDetails.vue';
 
 Vue.config.productionTip = false;
 
@@ -27,6 +28,7 @@ const routes = [
     { path: '/login', name: 'LoginPage', component: LoginPage },
     { path: '/signup', name: 'SignUp', component: SignUp },
     { path: '/otp', name: 'OTPpage', component: OTPpage },
+    { path: '/verify', name: 'VerifyAccDetails', component: VerifyAccDetails }
 ];
 
 const router = new Router({
