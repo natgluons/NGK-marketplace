@@ -6,30 +6,37 @@
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input v-model="username" type="text" id="username" required />
-                    <span class="hint">your username will be used as the referral code</span>
-                    <span class="character-count">{{ username.length }}/20</span>
+                    <div class="hint-count-wrapper">
+                        <span class="hint">your username will be used as the referral code</span>
+                        <span class="character-count">{{ username.length }}/20</span>
+                    </div>
                 </div>
 
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input v-model="password" type="password" id="password" required />
-                    <span class="hint">your password must contain 8 characters with at least 1 letter, 1 number, and 1
-                        special
-                        character</span>
-                    <span class="character-count">{{ password.length }}/15</span>
+                    <div class="hint-count-wrapper">
+                        <span class="hint">must contain 8 characters with at least 1 letter, 1 number, and
+                            1 special character</span>
+                        <span class="character-count">{{ password.length }}/32</span>
+                    </div>
                 </div>
 
                 <div class="form-group">
                     <label for="confirm-password">Confirm password</label>
                     <input v-model="confirmPassword" type="password" id="confirm-password" required />
-                    <span class="character-count">{{ confirmPassword.length }}/15</span>
+                    <div class="hint-count-wrapper">
+                        <span class="character-count">{{ confirmPassword.length }}/32</span>
+                    </div>
                 </div>
 
                 <div class="form-group">
                     <label for="referral-code">Referral code (optional)</label>
                     <input v-model="referralCode" type="text" id="referral-code" />
-                    <span class="hint">example: ref/username</span>
-                    <span class="character-count">{{ referralCode.length }}/15</span>
+                    <div class="hint-count-wrapper">
+                        <span class="hint">example: ref/username</span>
+                        <span class="character-count">{{ referralCode.length }}/15</span>
+                    </div>
                 </div>
 
                 <button type="submit" class="continue-button">Continue to Sign Up</button>
@@ -44,6 +51,7 @@
         </div>
     </div>
 </template>
+
 
 <script>
 export default {
@@ -133,16 +141,35 @@ export default {
 </script>
 
 <style scoped>
+.hint-count-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hint {
+    font-size: 10px;
+    color: #999;
+}
+
+.character-count {
+    font-size: 10px;
+    color: #999;
+    margin-left: auto;
+    /* Ensures the character count stays on the right */
+    text-align: right;
+}
+
 .sign-up-process {
     font-family: 'Inter', sans-serif;
     max-width: 360px;
     margin: auto;
-    /* padding: 20px; */
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 85vh;
+    height: 75vh;
+    width: 85%;
 }
 
 h2 {
@@ -153,11 +180,12 @@ h2 {
 .form-group {
     margin-bottom: 20px;
     text-align: left;
+    margin-right: 17px;
 }
 
 label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 1px;
     color: #666;
 }
 
@@ -176,9 +204,10 @@ input {
 }
 
 .character-count {
+    margin-top: 5px;
     display: block;
     text-align: right;
-    font-size: 12px;
+    font-size: 11px;
     color: #999;
 }
 

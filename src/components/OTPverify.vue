@@ -131,8 +131,8 @@ export default {
 }
 
 .otp-input-container input {
-    width: 40px;
-    height: 40px;
+    width: 28px;
+    height: 35px;
     font-size: 18px;
     text-align: center;
     border: 1px solid #ccc;
@@ -190,7 +190,7 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 85vh;
+    height: 75vh;
 }
 
 h2 {
