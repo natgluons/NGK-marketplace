@@ -22,7 +22,8 @@
                         <div class="carousel">
                             <div class="item" v-for="breed in ['Toy Poodle', 'Schnauzer', 'Yorkshire']" :key="breed">
                                 <img :src="getBreedImage(breed)" :alt="breed" />
-                                <router-link :to="{ name: 'BreedPage', params: { breedName: breed } }" class="item-text">
+                                <router-link :to="{ name: 'BreedPage', params: { breedName: breed } }"
+                                    class="item-text">
                                     {{ breed }}
                                 </router-link>
                             </div>
@@ -32,8 +33,8 @@
                     <div class="the-essentials">
                         <div class="carousel">
                             <div class="item">
-                                <img src="@/assets/royalcanin.jpg" alt="Dog Food"/> 
-                                 <!-- style="border: 3px solid #E6EDF1;"/> -->
+                                <img src="@/assets/royalcanin.jpg" alt="Dog Food" />
+                                <!-- style="border: 3px solid #E6EDF1;"/> -->
                                 <div class="item-text">Dog Food</div>
                             </div>
                             <!-- <div class="item">
@@ -55,7 +56,7 @@ export default {
         return {
             currentIndex: 0,
             carouselImages: [
-                { src: require('@/assets/logongk.jpg'), alt: 'Image 1' },
+                { src: require('@/assets/logongk.png'), alt: 'Image 1' },
                 { src: require('@/assets/schnauzeradult3main.jpg'), alt: 'Image 2' },
                 { src: require('@/assets/schnauzeradult8main.jpg'), alt: 'Image 3' },
                 { src: require('@/assets/toypoodleadult1main.jpg'), alt: 'Image 4' },
@@ -114,7 +115,7 @@ export default {
     width: 100%;
     /* padding: 0px 3px; */
     /* min-height: 100vh; */
-    height:100%;
+    height: 100%;
     overflow-x: hidden;
     /* overflow-y: scroll; */
     /* Prevent horizontal scrolling */
@@ -206,8 +207,10 @@ export default {
     color: #333;
     font-size: clamp(12px, 3vw, 16px);
     white-space: nowrap;
-    text-decoration: none; /* Add this to remove underline */
-    display: block; /* Add this to make it a block element */
+    text-decoration: none;
+    /* Add this to remove underline */
+    display: block;
+    /* Add this to make it a block element */
 }
 
 /* Add styles for scrollbar */

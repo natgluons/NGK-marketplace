@@ -8,6 +8,9 @@ import ContactUs from './components/ContactUs.vue';
 import Transactions from './components/Transactions.vue';
 import Account from './components/Account.vue';
 import CartPage from './components/CartPage.vue';
+import LoginPage from './components/LoginPage.vue';
+import SignUp from './components/SignUp.vue';
+import OTPpage from './components/OTPpage.vue';
 
 Vue.config.productionTip = false;
 
@@ -21,6 +24,9 @@ const routes = [
     { path: '/transactions', name: 'Transactions', component: Transactions },
     { path: '/account', name: 'Account', component: Account },
     { path: '/cart', name: 'Cart', component: CartPage },
+    { path: '/login', name: 'LoginPage', component: LoginPage },
+    { path: '/signup', name: 'SignUp', component: SignUp },
+    { path: '/otp', name: 'OTPpage', component: OTPpage },
 ];
 
 const router = new Router({
