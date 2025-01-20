@@ -3,7 +3,10 @@
         <div class="header-item" @click="goBack">
             <img class="arrow-back" src="@/assets/backarrow.svg" alt="Arrow Back" />
         </div>
-        <div class="header-item title">NATASHA GADING</div>
+        <div class="header-item title">
+            <span class="red-text">NATASHA GADING</span>
+            <span class="black-text">DOG HOME</span>
+        </div>
         <div class="header-item">
             <router-link v-for="(item, index) in navItems" :key="index" :to="item.to" class="header-item nav-item"
                 @click="setActive(index)">
@@ -84,10 +87,18 @@ export default {
 .title {
     font-family: "Itim", cursive;
     font-weight: 700;
-    color: #f10000;
-    font-size: 20px;
+    font-size: 17px;
     text-align: center;
     /* border-radius: 10px; */
+}
+
+.red-text {
+    color: #f10000;
+}
+
+.black-text {
+    color: black;
+    margin-left: 5px;
 }
 
 .shopping-cart,

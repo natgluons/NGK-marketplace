@@ -49,7 +49,7 @@
         • Guaranteed Healthy<br><br>
 
         <strong>Visitation & Shipping</strong><br>
-        ✓ Visits available by appointment (booking required!). We're located in Kelapa Gading, North Jakarta (3.1km from MKG)<br>
+        ✓ Visits available by appointment (booking required!). We're located in Kelapa Gading, North Jakarta (walking distance from MKG)<br>
         ✓ Home delivery available<br>
         ✓ Shipping throughout Indonesia
       </p>
@@ -58,7 +58,7 @@
       <strong>Interested in bringing this adorable puppy home?</strong>
       <br /><br />
       Contact us for pricing, availability, appointment, or shipping information.<br /><br />
-      ✆ WhatsApp: <a href="https://wa.me/6281808600487">(+62) 8180-860-0487</a>
+      ✆ WhatsApp: <a href="https://wa.me/6281234187970">(+62) 81234-18-7970</a>
       <br /><br /><br /><br />
     </div>
   </div>
@@ -203,7 +203,7 @@ button {
 
 .description {
   font-family: "Inter-Regular", Helvetica;
-  color: #9aa0a6;
+  color: #7c7c7c;
   font-size: 16px;
   letter-spacing: 0.32px;
   line-height: 19.2px;

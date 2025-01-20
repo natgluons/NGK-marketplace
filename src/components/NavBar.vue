@@ -1,10 +1,9 @@
 <template>
-    <nav class="navbar">
-        <router-link v-for="(item, index) in navItems" :key="index" :to="item.to" class="nav-item"
-            @click="setActive(index)">
+    <nav class="navbar" v-if="!hideNavbar">
+        <router-link v-for="(item, index) in navItems" :key="index" :to="item.to" class="nav-item">
             <div class="nav-item-container" @mouseover="setActive(index)" :class="{ 'active': activeIndex === index }">
-                <img :src="item.icon" :alt="item.text">
-                <span>{{ item.text }}</span>
+                <img :src="item.icon" :alt="item.text" :class="{ 'active': activeIndex === index }">
+                <span :class="{ 'active': activeIndex === index }">{{ item.text }}</span>
             </div>
         </router-link>
     </nav>
@@ -36,8 +35,11 @@ export default {
     },
     computed: {
         isLoggedIn() {
-            // Check if a token exists in localStorage
             return localStorage.getItem('token') !== null;
+        },
+        hideNavbar() {
+            const hiddenPages = ['/login', '/signup', '/otp-verify', '/acc-details', '/forgot-password', '/reset-password'];
+            return hiddenPages.includes(this.$route.path);
         }
     },
     methods: {        
@@ -46,7 +48,7 @@ export default {
         },
         updateActiveIndex() {
             const currentPath = this.$route.path;
-            this.activeIndex = this.navItems.findIndex(item => item.to === currentPath && !item.isPlaceholder);
+            this.activeIndex = this.navItems.findIndex(item => item.to === currentPath);
         }
     },
     mounted() {
@@ -95,8 +97,18 @@ export default {
     color: #ff0000;
 }
 
-.nav-item span.active {
+.nav-item-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav-item-container.active span {
     color: #ff0000;
+}
+
+.nav-item-container.active img {
+    filter: invert(20%) sepia(84%) saturate(6473%) hue-rotate(357deg) brightness(90%) contrast(126%);
 }
 
 .nav-item img {
@@ -114,26 +126,11 @@ export default {
     filter: invert(20%) sepia(84%) saturate(6473%) hue-rotate(357deg) brightness(90%) contrast(126%);
 }
 
+/* .nav-item span.active {
+    color: #ff0000;
+}
+
 .nav-item img.active {
-    /* filter: invert(95%) sepia(100%) saturate(100000%) hue-rotate(287deg) brightness(75%) contrast(180%);  */
     filter: invert(20%) sepia(84%) saturate(6473%) hue-rotate(357deg) brightness(90%) contrast(126%);
-}
-
-.nav-item-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.nav-item-container:hover img {
-    /* Add your image hover styles here */
-    filter: invert(20%) sepia(84%) saturate(6473%) hue-rotate(357deg) brightness(90%) contrast(126%);
-
-}
-
-.nav-item-container:hover span {
-    /* Add your text hover styles here */
-    filter: invert(20%) sepia(84%) saturate(6473%) hue-rotate(357deg) brightness(90%) contrast(126%);
-
-}
+} */
 </style>

@@ -21,15 +21,14 @@
                     <div class="our-puppies-carousel">
                         <div class="carousel">
                             <div class="item" v-for="breed in ['Toy Poodle', 'Schnauzer', 'Yorkshire']" :key="breed">
-                                <img :src="getBreedImage(breed)" :alt="breed" />
-                                <router-link :to="{ name: 'BreedPage', params: { breedName: breed } }"
-                                    class="item-text">
-                                    {{ breed }}
+                                <router-link :to="{ name: 'BreedPage', params: { breedName: breed } }">
+                                    <img :src="getBreedImage(breed)" :alt="breed" />
+                                    <div class="item-text">{{ breed }}</div>
                                 </router-link>
                             </div>
                         </div>
                     </div>
-                    <h2 class="section-title">The Essentials</h2>
+                    <h2 class="section-title">Our Other Services</h2>
                     <div class="the-essentials">
                         <div class="carousel">
                             <div class="item">
@@ -37,10 +36,10 @@
                                 <!-- style="border: 3px solid #E6EDF1;"/> -->
                                 <div class="item-text">Dog Food</div>
                             </div>
-                            <!-- <div class="item">
-                                <img src="@/assets/examplepic.png" alt="Accessories" />
-                                <div class="item-text">Accessories</div>
-                            </div> -->
+                            <div class="item">
+                                <img src="@/assets/daycare.png" alt="Dog Hotel/Daycare" />
+                                <div class="item-text">Dog Hotel/Daycare</div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -1,42 +1,90 @@
 <template>
   <div class="sign-in-page">
-    <div class="content">
-      <h1 class="title">Sign in</h1>
-      <div class="input-group">
-        <label for="username">Username / WhatsApp number</label>
-        <input id="username" type="text" v-model="username">
+    <div class="sign-in-container">
+      <div class="maintenance-alert">
+        <div class="alert-content">
+          <span class="alert-icon">⚠️</span>
+          <div class="alert-text">
+            <h2 class="alert-title">Service Under Construction</h2>
+            <p class="alert-description">
+            We're implementing our backend services - login will be available soon.
+            </p>
+          </div>
+        </div>
       </div>
-      <div class="input-group">
-        <label for="password">Password</label>
-        <input id="password" type="password" v-model="password">
+      <div class="content">
+        <h1 class="title">Sign in</h1>
+        <div class="input-group">
+          <label for="username">{{ isWALogin ? 'WhatsApp number' : 'Username' }}</label>
+          <div v-if="isWALogin" class="whatsapp-input">
+            <span class="prefix">+62</span>
+            <input id="whatsapp" type="text" v-model="username">
+          </div>
+          <input v-else id="username" type="text" v-model="username">
+        </div>
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input id="password" type="password" v-model="password">
+          <div class="forgot-password">
+            <a href="#" @click.prevent="forgotPassword">Forgot password?</a>
+          </div>
+        </div>
+        <button class="sign-in-button" @click="signIn">Sign in</button>
+        <div class="toggle-login">
+          <a href="#" @click.prevent="toggleLoginMethod">
+            {{ isWALogin ? 'Sign in with username' : 'Sign in with WhatsApp number' }}
+          </a>
+        </div>
+        <div class="or-divider">or</div>
+        <button class="sign-up-button" @click="signUp">Sign up</button>
       </div>
-      <button class="sign-in-button" @click="signIn">Sign in</button>
-      <div class="or-divider">or</div>
-      <button class="sign-up-button" @click="signUp">Sign up</button>
     </div>
   </div>
 </template>
 
 <script>
+import auth from '@/services/auth';
+
 export default {
   name: 'LoginPage',
   data() {
     return {
       username: '',
-      password: ''
+      password: '',
+      isWALogin: false
     }
   },
   methods: {
     signIn() {
-      // Add sign-in logic here
-      console.log('Signing in with:', this.username, this.password)
-      // Simulate sign-in logic with API call
+      if (!this.username || !this.password) {
+        alert(`Please input your ${this.isWALogin ? 'WhatsApp number' : 'username'} and password to sign in`);
+        return;
+      }
+
+      // Test cases
+      if (this.isWALogin && this.username === '0000' && this.password === 'test123#') {
+        alert('Ignoring this fetch as the WhatsApp number and password are used for testing only');
+        console.log('Test login successful');
+        this.$router.push({ name: 'Home' });
+        return;
+      }
+      if (!this.isWALogin && this.username === 'admin' && this.password === 'admin123#') {
+        alert('Ignoring this fetch as the username and password are used for testing only');
+        console.log('Test login successful');
+        this.$router.push({ name: 'Home' });
+        return;
+      }
+
+      // Regular login flow
       fetch('https://api.example.com/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username: this.username, password: this.password }),
+        body: JSON.stringify({
+          [this.isWALogin ? 'whatsappNumber' : 'username']: this.isWALogin ? '+62' + this.username : this.username,
+          password: this.password
+        }),
       })
         .then(response => {
           if (response.ok) {
@@ -50,9 +98,16 @@ export default {
           alert('An error occurred while signing in. Please try again later.');
         });
     },
+    toggleLoginMethod() {
+      this.isWALogin = !this.isWALogin;
+      this.username = '';
+      this.password = '';
+    },
+    forgotPassword() {
+      this.$router.push({ name: 'ForgotPassword' });
+    },
     signUp() {
-      // direct to SignUp.vue
-      this.$router.push({ name: 'SignUp' })
+      this.$router.push({ name: 'SignUp' });
     }
   }
 }
@@ -132,6 +187,19 @@ input {
   font-family: "Inter-Regular", Helvetica;
   font-size: 14px;
   margin: 15px 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.or-divider::before,
+.or-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background-color: #c2c2c2;
+  margin: 0 5px;
 }
 
 .sign-up-button {
@@ -151,5 +219,119 @@ input {
 .sign-up-button:hover {
   background-color: #eb221e;
   color: #ffffff;
+}
+
+.sign-in-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.maintenance-alert {
+  width: 100%;
+  margin: 0 0 0 0;
+  padding: 0;
+  background-color: #fefce8;
+  border: 0.5px solid #fef08a;
+  border-radius: 1px;
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.alert-content {
+  display: flex;
+  gap: 0px;
+  align-items: flex-start;
+}
+
+.alert-icon {
+  font-size: 20px;
+  padding-left:13px;
+}
+
+.alert-text {
+  flex: 1;
+  padding-left: 5px;
+}
+
+.alert-title {
+  font-family: "Inter-Bold", Helvetica;
+  font-size: 13px;
+  font-weight: 600;
+  color: #854d0e;
+  margin: 0;
+  padding: 0;
+}
+
+.alert-description {
+  font-family: "Inter-Regular", Helvetica;
+  font-size: 10px;
+  color: #713f12;
+  line-height: 1;
+  margin: 0 0 0 0;
+  padding: 0;
+}
+
+.forgot-password {
+  text-align: right;
+  margin-top: 5px;
+}
+
+.forgot-password a {
+  color: #eb221e;
+  text-decoration: none;
+  font-size: 14px;
+  font-family: "Inter-Regular", Helvetica;
+}
+
+.forgot-password a:hover {
+  text-decoration: underline;
+}
+
+.whatsapp-input {
+  display: flex;
+  align-items: center;
+  border: 1px solid #c2c2c2;
+  border-radius: 4px;
+}
+
+.prefix {
+  padding: 8px 12px;
+  background-color: #f5f5f5;
+  color: #666;
+  border-right: 1px solid #c2c2c2;
+  font-family: "Inter-Regular", Helvetica;
+}
+
+.whatsapp-input input {
+  flex: 1;
+  border: none;
+  border-radius: 0;
+  padding: 8px;
+  font-size: 14px;
+}
+
+.whatsapp-input input:focus {
+  outline: none;
+}
+
+.toggle-login {
+  text-align: center;
+  margin: 15px 0;
+}
+
+.toggle-login a {
+  color: #eb221e;
+  text-decoration: none;
+  font-size: 14px;
+  font-family: "Inter-Regular", Helvetica;
+}
+
+.toggle-login a:hover {
+  text-decoration: underline;
 }
 </style>

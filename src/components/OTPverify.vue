@@ -3,6 +3,7 @@
         <div v-if="currentStep === 'otp'">
             <div class="otp-verification-page">
                 <h1 class="title">Sign Up Verification</h1>
+                <p class="phone-number">OTP sent to {{ phoneNumber }}</p>
 
                 <div class="otp-input-container">
                     <input v-for="(digit, index) in otpDigits" :key="index" v-model="otpDigits[index]" type="text"
@@ -12,6 +13,16 @@
 
                 <button class="button" @click="verifyOTP">Verify OTP</button>
                 <button class="button" @click="changeNumber">Change WhatsApp Number</button>
+                
+                <div class="resend-container">
+                    <button 
+                        class="resend-button" 
+                        @click="resendOTP" 
+                        :disabled="!canResend"
+                    >
+                        {{ resendButtonText }}
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -33,9 +44,75 @@ export default {
         return {
             currentStep: 'otp',
             otpDigits: ['', '', '', '', '', ''],
+            timer: 90, // Changed to 90 seconds
+            canResend: false,
+            phoneNumber: '',
+            timerInterval: null
+        }
+    },
+    computed: {
+        resendButtonText() {
+            if (this.canResend) {
+                return 'Resend OTP'
+            }
+            const minutes = Math.floor(this.timer / 60)
+            const seconds = this.timer % 60
+            return `Resend OTP in ${minutes}:${seconds.toString().padStart(2, '0')}`
+        }
+    },
+    created() {
+        // Get phone number from route params
+        this.phoneNumber = this.$route.params.phoneNumber
+        if (!this.phoneNumber) {
+            // Redirect back to signup if no phone number
+            this.$router.push({ name: 'SignUp' })
+            return
+        }
+        this.startTimer()
+    },
+    beforeDestroy() {
+        if (this.timerInterval) {
+            clearInterval(this.timerInterval)
         }
     },
     methods: {
+        startTimer() {
+            this.timer = 90 // Changed to 90 seconds
+            this.canResend = false
+            this.timerInterval = setInterval(() => {
+                if (this.timer > 0) {
+                    this.timer--
+                } else {
+                    this.canResend = true
+                    clearInterval(this.timerInterval)
+                }
+            }, 1000)
+        },
+        resendOTP() {
+            if (!this.canResend) return
+
+            // API call to resend OTP
+            fetch('https://api.example.com/sendOTP', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ phoneNumber: this.phoneNumber }),
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Reset timer and OTP inputs
+                    this.otpDigits = ['', '', '', '', '', '']
+                    this.startTimer()
+                } else {
+                    alert('Failed to resend OTP')
+                }
+            })
+            .catch(error => {
+                console.error('Error resending OTP:', error)
+                alert('Error resending OTP')
+            })
+        },
         nextStep() {
             const steps = ['otp', 'verification-success']; // 'account-details', 'sign-up-completed'
             const currentIndex = steps.indexOf(this.currentStep);
@@ -86,6 +163,7 @@ export default {
                         // Handle error, show error message, etc.
                     });
             } else {
+                alert('Ignoring verification as OTP is 000000 (test case)');
                 console.log('OTP verified successfully:', '000000 (testing case)');
                 this.nextStep();
             }
@@ -246,5 +324,35 @@ img {
     width: 60px;
     height: 60px;
     margin-bottom: 20px;
+}
+
+.phone-number {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.resend-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.resend-button {
+    background: none;
+    border: none;
+    color: #eb221e;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-family: "Inter-SemiBold", Helvetica;
+}
+
+.resend-button:disabled {
+    color: #999;
+    cursor: not-allowed;
+}
+
+.resend-button:hover:not(:disabled) {
+    text-decoration: underline;
 }
 </style>

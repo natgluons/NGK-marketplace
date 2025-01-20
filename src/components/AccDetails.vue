@@ -7,7 +7,7 @@
                     <label for="username">Username</label>
                     <input v-model="username" type="text" id="username" required />
                     <div class="hint-count-wrapper">
-                        <span class="hint">your username will be used as the referral code</span>
+                        <span class="hint">must contain at least 1 letter, your username can be used as a referral code for others when signing up</span>
                         <span class="character-count">{{ username.length }}/20</span>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                     <label for="referral-code">Referral code (optional)</label>
                     <input v-model="referralCode" type="text" id="referral-code" />
                     <div class="hint-count-wrapper">
-                        <span class="hint">example: ref/username</span>
+                        <span class="hint">enter your referral's username (can be found in their "Account" section)</span>
                         <span class="character-count">{{ referralCode.length }}/15</span>
                     </div>
                 </div>
@@ -77,34 +77,55 @@ export default {
             // Validate input (add admin account for testing)
             if (this.validateInput() || (this.username === 'admin' && this.password === 'admin123#')) {
                 if (!(this.username === 'admin' && this.password === 'admin123#')) {
-                    fetch('https://api.example.com/submitAccountDetails', {
+                    // First check if username exists
+                    fetch('https://api.example.com/check-username', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({
-                            username: this.username,
-                            password: this.password,
-                            referralCode: this.referralCode
+                            username: this.username
                         }),
                     })
-                        .then(response => {
-                            if (response.ok) {
-                                console.log('Account details submitted successfully:', {
+                    .then(response => {
+                        if (response.ok) {
+                            // Username is available, proceed with account creation
+                            return fetch('https://api.example.com/submitAccountDetails', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({
                                     username: this.username,
                                     password: this.password,
                                     referralCode: this.referralCode
-                                });
-                                this.nextStep();
-                            } else {
-                                throw new Error('Failed to submit account details');
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error submitting account details:', error);
+                                }),
+                            });
+                        } else {
+                            alert('Username taken, please change your username to continue');
+                            throw new Error('Username already exists');
+                        }
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            console.log('Account details submitted successfully:', {
+                                username: this.username,
+                                password: this.password,
+                                referralCode: this.referralCode
+                            });
+                            this.nextStep();
+                        } else {
+                            throw new Error('Failed to submit account details');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        if (error.message !== 'Username already exists') {
                             alert('An error occurred while submitting account details. Please try again later.');
-                        });
+                        }
+                    });
                 } else {
+                    alert('Ignoring this fetch as this username and password are used for testing purpose.');
                     console.log('Account details submitted successfully:', {
                         username: this.username,
                         password: this.password,
@@ -118,6 +139,10 @@ export default {
             // Basic validation
             if (this.username.length === 0 || this.username.length > 15) {
                 alert('Username must be between 1 and 15 characters');
+                return false;
+            }
+            if (!/[a-zA-Z]/.test(this.username)) {
+                alert('Username must contain at least 1 letter');
                 return false;
             }
             if (this.password.length < 8 || this.password.length > 32) {
@@ -168,13 +193,14 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 75vh;
+    height: 80vh;
     width: 85%;
 }
 
 h2 {
     color: #333;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
+    font-size: 1.3em;
 }
 
 .form-group {
@@ -201,14 +227,6 @@ input {
     font-size: 12px;
     color: #999;
     margin-top: 5px;
-}
-
-.character-count {
-    margin-top: 5px;
-    display: block;
-    text-align: right;
-    font-size: 11px;
-    color: #999;
 }
 
 .continue-button,

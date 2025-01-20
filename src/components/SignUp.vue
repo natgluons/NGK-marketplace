@@ -11,10 +11,9 @@
                 </div>
                 <input v-model="whatsappNumber" type="tel" class="whatsapp-input" placeholder="e.g. 81234567890" />
             </div>
-            <router-link v-if="whatsappNumber !== ''" to="/otp">
-                <button class="send-otp-button" @click="sendOTP">Send OTP to WhatsApp</button>
-            </router-link>
-            <button v-else class="send-otp-button" @click="sendOTP">Send OTP to WhatsApp</button>
+            <button class="send-otp-button" @click="sendOTP">
+                Send OTP to WhatsApp
+            </button>
         </div>
     </div>
 </template>
@@ -34,33 +33,58 @@ export default {
                 return;
             }
 
-            if (this.whatsappNumber === '000000') {
-                console.log('Ignoring fetch as WhatsApp number is 000000 (testing case)');
-                // this.nextStep();
-            } else {
-                fetch('https://api.example.com/sendOTP', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ phoneNumber: this.whatsappNumber }),
-                })
-                    .then(response => {
-                        if (response.ok && this.whatsappNumber === '000000') {
-                            console.log(`OTP sent successfully to +62${this.whatsappNumber}`);
-                            // this.nextStep();
-                        } else {
-                            throw new Error('Failed to send OTP');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error sending OTP:', error);
-                        // alert('Error sending OTP', error); // Add error as alert('')
-                        return; // Added return statement to prevent proceeding to next page
-                    });
+            if (this.whatsappNumber === '0000') {
+                alert('Ignoring fetch as WhatsApp number is 0000 (testing case)');
+                console.log('Ignoring fetch as WhatsApp number is 0000 (testing case)');
+                this.$router.push({ 
+                    name: 'OTPverify',
+                    params: { phoneNumber: `+62${this.whatsappNumber}` }
+                });
+                return;
             }
-        },
 
+            // First check if WhatsApp number exists
+            fetch('https://api.example.com/check-whatsapp', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ phoneNumber: this.whatsappNumber }),
+            })
+            .then(response => {
+                if (response.ok) {
+                    // WhatsApp number is available, proceed with OTP
+                    return fetch('https://api.example.com/sendOTP', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ phoneNumber: this.whatsappNumber }),
+                    });
+                } else {
+                    alert('WhatsApp number has been registered, please sign in or change your WhatsApp number to continue');
+                    throw new Error('WhatsApp number already registered');
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log(`OTP sent successfully to +62${this.whatsappNumber}`);
+                    this.$router.push({ 
+                        name: 'OTPverify',
+                        params: { phoneNumber: `+62${this.whatsappNumber}` }
+                    });
+                } else {
+                    throw new Error('Failed to send OTP');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                if (error.message !== 'WhatsApp number already registered') {
+                    console.error('Error sending OTP:', error);
+                    alert('Failed to send OTP');
+                }
+            });
+        }
     }
 }
 </script>
