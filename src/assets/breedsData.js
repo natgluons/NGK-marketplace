@@ -31,7 +31,7 @@ export default {
             require('@/assets/schnauzeradult2.jpg'),
             require('@/assets/schnauzeradult5.jpg'),
         ],
-        description: 'The Schnauzer is a robust and fearless dog with a charming personality.',
+        description: 'The Miniature Schnauzer is a robust and fearless dog with a charming personality.',
         price: 'starts from 6,000,000 IDR',
         colors: [
             { name: 'Salt & Pepper', class: 'salt-pepper', ellipseClass: 'ellipse-10' },
@@ -39,7 +39,7 @@ export default {
             { name: 'White', class: 'white', ellipseClass: 'ellipse' }
         ]
     },
-    'Yorkshire': {
+    'Yorkie': {
         images: [
             require('@/assets/yorkie1.jpg'),
             require('@/assets/yorkie2.jpg'),
@@ -47,7 +47,7 @@ export default {
             require('@/assets/yorkie5.jpg'),
             require('@/assets/yorkie6.jpg'),
         ],
-        description: 'The Yorkshire Terrier is a small but brave dog with a silky coat and big personality.',
+        description: 'The Yorkshire Terrier (Yorkie) is a small but brave dog with a silky coat and big personality.',
         price: 'starts from 7,000,000 IDR',
         colors: [
             // { name: 'Blue & Tan', class: 'blue-tan', ellipseClass: 'ellipse-7' },

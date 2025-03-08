@@ -17,26 +17,13 @@ export default {
             activeIndex: null,
             navItems: [
                 { to: '/', icon: require('@/assets/home.svg'), text: 'Home' },
-                { to: '/contact-us', icon: require('@/assets/contactus.svg'), text: 'Contact Us' },
-                {
-                    to: this.isLoggedIn ? '/transactions' : '/login', 
-                    icon: require('@/assets/transactions.svg'), 
-                    text: 'Transactions', 
-                    isPlaceholder: true
-                },
-                { 
-                    to: this.isLoggedIn ? '/account' : '/login', 
-                    icon: require('@/assets/account.svg'), 
-                    text: 'Account' ,
-                    isPlaceholder: true
-                },
+                { to: '/vouchers', icon: require('@/assets/vouchers.svg'), text: 'Vouchers' },
+                { to: '/transactions', icon: require('@/assets/transactions.svg'), text: 'Transactions' },
+                { to: '/account', icon: require('@/assets/account.svg'), text: 'Account' },
             ]
         }
     },
     computed: {
-        isLoggedIn() {
-            return localStorage.getItem('token') !== null;
-        },
         hideNavbar() {
             const hiddenPages = ['/login', '/signup', '/otp-verify', '/acc-details', '/forgot-password', '/reset-password'];
             return hiddenPages.includes(this.$route.path);

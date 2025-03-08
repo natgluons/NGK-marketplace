@@ -35,31 +35,48 @@
         </div>
       </div>
     </div>
-    <div class="description">
-      {{ breedData.description }}<br /><br />
-      Price range: {{ breedData.price }}<br />
-      <p>
-        <strong>Why Natasha Gading Kennel?</strong><br>
-        • Pedigree Completed (Stamboom)<br>
-        • Microchip<br>
-        • E4 Vaccine<br>
-        • Bloodline Imported from Taiwan<br>
-        • Regular Deworming & Vitamins<br>
-        • Flea & Worm-Free<br>
-        • Guaranteed Healthy<br><br>
+    <div class="info-section">
+      <div class="info-box">
+        <p class="breed-description">{{ breedData.description }}</p>
+        <div class="price-info">Price range: {{ breedData.price }}</div>
+      </div>
 
-        <strong>Visitation & Shipping</strong><br>
-        ✓ Visits available by appointment (booking required!). We're located in Kelapa Gading, North Jakarta (walking distance from MKG)<br>
-        ✓ Home delivery available<br>
-        ✓ Shipping throughout Indonesia
-      </p>
+      <div class="features-box">
+        <h3 class="features-title">Why Natasha Gading Kennel?</h3>
+        <ul class="features-list">
+          <li>Pedigree Completed (Stamboom)</li>
+          <li>Microchip</li>
+          <li>E4 Vaccine</li>
+          <li>Bloodline Imported from Taiwan</li>
+          <li>Regular Deworming & Vitamins</li>
+          <li>Flea & Worm-Free</li>
+          <li>Guaranteed Healthy</li>
+        </ul>
+      </div>
+
+      <div class="features-box">
+        <h3 class="features-title">Visitation & Shipping</h3>
+        <ul class="features-list checkmark">
+          <li>Visits available by appointment (booking required!). We're located in Kelapa Gading, North Jakarta (walking distance from Mall Kelapa Gading)</li>
+          <li>Home delivery available</li>
+          <li>Shipping throughout Indonesia</li>
+        </ul>
+      </div>
     </div>
-    <div class="advertise">
-      <strong>Interested in bringing this adorable puppy home?</strong>
-      <br /><br />
-      Contact us for pricing, availability, appointment, or shipping information.<br /><br />
-      ✆ WhatsApp: <a href="https://wa.me/6281234187970">(+62) 81234-18-7970</a>
-      <br /><br /><br /><br />
+    <div class="contact-section">
+      <div class="section-divider">
+        <div class="line"></div>
+        <span>Contact Us</span>
+        <div class="line"></div>
+      </div>
+      <div class="contact-box">
+        <h3 class="contact-title">Interested in bringing this adorable puppy home?</h3>
+        <p class="contact-text">Contact us for pricing, availability, appointment, or shipping information.</p>
+        <div class="whatsapp-button">
+          <img src="@/assets/whatsapp.svg" alt="WhatsApp" class="whatsapp-icon" />
+          <a href="https://wa.me/6281234187970">(+62) 81234-18-7970</a>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -210,13 +227,95 @@ button {
   margin: 15px;
 }
 
-.advertise {
-  font-family: "Inter-Regular", Helvetica;
-  color: #222222;
+.contact-section {
+  padding: 20px 15px 80px 15px;
+}
+
+.section-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.section-divider .line {
+  height: 1px;
+  background-color: #e0e0e0;
+  flex: 1;
+  max-width: 80px;
+}
+
+.section-divider span {
+  color: #666;
+  font-size: 16px;
+  font-family: "Inter-Medium", Helvetica;
+  white-space: nowrap;
+}
+
+.contact-box {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.contact-title {
+  font-family: "Inter-SemiBold", Helvetica;
+  color: #333;
   font-size: 18px;
-  letter-spacing: 0.3px;
-  line-height: 20.1px;
-  margin: 20px;
+  margin: 0 0 15px 0;
+}
+
+.contact-text {
+  font-family: "Inter-Regular", Helvetica;
+  color: #666;
+  font-size: 14px;
+  line-height: 1.4;
+  margin: 0 0 20px 0;
+}
+
+.whatsapp-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 25px;
+  padding: 12px 20px;
+  margin: 0 auto;
+  max-width: fit-content;
+  transition: all 0.3s ease;
+}
+
+.whatsapp-icon {
+  width: 20px;
+  height: 20px;
+  transition: filter 0.3s ease;
+}
+
+.whatsapp-button a {
+  color: #333;
+  text-decoration: none;
+  font-family: "Inter-Medium", Helvetica;
+  font-size: 15px;
+  transition: color 0.3s ease;
+}
+
+.whatsapp-button:hover {
+  background-color: #eb221e;
+  border-color: #eb221e;
+}
+
+.whatsapp-button:hover a {
+  color: #ffffff;
+}
+
+.whatsapp-button:hover .whatsapp-icon {
+  filter: brightness(0) invert(1);
 }
 
 .available-colors {
@@ -225,46 +324,34 @@ button {
   gap: 5px;
   margin-top: 10px;
   margin-left: 15px;
-  margin-right: 0;
+  margin-right: 15px;
+  padding-right: 5px;
 }
 
 .overlap-group-2 {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   background-color: #ffffff;
   border-radius: 10px;
   border: 1px solid #9aa0a6;
-  padding: 4px;
-  width: 100px;
+  padding: 4px 8px;
+  width: fit-content;
   height: 30px;
+}
+
+/* Special case for Salt & Pepper */
+.overlap-group-2:has(.text-wrapper-2:contains("Salt & Pepper")) {
+  min-width: 140px;
 }
 
 .text-wrapper-2 {
   margin-left: 10px;
+  margin-right: 10px;
   font-family: "Inter-Regular", Helvetica;
   color: #9aa0a6;
   font-size: 16px;
-}
-
-.carousel {
-  display: flex;
-  width: 100%;
-  overflow-x: hidden;
-  scroll-snap-type: x mandatory;
-  position: relative;
-}
-
-.carousel::-webkit-scrollbar {
-  display: none; /* Hide scrollbar for WebKit browsers */
-}
-
-.carousel::-webkit-scrollbar-track {
-  display: none; /* Hide scrollbar track for WebKit browsers */
-}
-
-.carousel::-webkit-scrollbar-thumb {
-  display: none; /* Hide scrollbar thumb for WebKit browsers */
+  white-space: nowrap;
 }
 
 .ellipse, .ellipse-2, .ellipse-3, .ellipse-4, .ellipse-5, .ellipse-6 {
@@ -274,15 +361,19 @@ button {
   border: 1px solid #9aa0a6;
   margin-left: 10px;
   margin-right: 8px;
+  flex-shrink: 0;
+  aspect-ratio: 1;
 }
 
 .ellipse-10 {
-  width: 25px;
-  height: 18px;
+  width: 19px;
+  height: 19px;
   border-radius: 50%;
   border: 1px solid #9aa0a6;
-  margin-left: 0px;
+  margin-left: 10px;
   margin-right: 5px;
+  flex-shrink: 0;
+  aspect-ratio: 1;
 }
 
 .ellipse { background-color: #fffcfc; }
@@ -295,5 +386,68 @@ button {
 .ellipse-8 { background-color: #8b4513; } /* Black & Tan */
 .ellipse-9 { background-color: #587790; } /* Steel Blue */
 .ellipse-10 { background-color: #b4b9b0; } /* Salt & Pepper */
+
+.info-section {
+  padding: 15px;
+}
+
+.info-box, .features-box {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.breed-description {
+  color: #333;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0 0 15px 0;
+}
+
+.price-info {
+  color: #333;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.features-title {
+  color: #333;
+  font-size: 16px;
+  font-family: "Inter-SemiBold", Helvetica;
+  margin: 0 0 12px 0;
+}
+
+.features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.features-list li {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.5;
+  padding-left: 20px;
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.features-list li:before {
+  content: "•";
+  position: absolute;
+  left: 5px;
+  color: #666;
+}
+
+.features-list li:last-child {
+  margin-bottom: 0;
+}
+
+.features-list.checkmark li:before {
+  content: "✓";
+  color: #666;
+}
 
 </style>

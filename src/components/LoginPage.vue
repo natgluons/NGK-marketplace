@@ -15,7 +15,7 @@
       <div class="content">
         <h1 class="title">Sign in</h1>
         <div class="input-group">
-          <label for="username">{{ isWALogin ? 'WhatsApp number' : 'Username' }}</label>
+          <label for="username">{{ isWALogin ? 'WhatsApp number*' : 'Username*' }}</label>
           <div v-if="isWALogin" class="whatsapp-input">
             <span class="prefix">+62</span>
             <input id="whatsapp" type="text" v-model="username">
@@ -23,7 +23,7 @@
           <input v-else id="username" type="text" v-model="username">
         </div>
         <div class="input-group">
-          <label for="password">Password</label>
+          <label for="password">Password*</label>
           <input id="password" type="password" v-model="password">
           <div class="forgot-password">
             <a href="#" @click.prevent="forgotPassword">Forgot password?</a>
@@ -117,17 +117,41 @@ export default {
 .sign-in-page {
   display: flex;
   justify-content: center;
-  align-items: center;
-  min-height: 100%;
+  align-items: flex-start;
+  min-height: calc(100vh - 90px);
   background-color: #ffffff;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.sign-in-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.maintenance-alert {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #fefce8;
+  border-top: 0.5px solid #fef08a;
+  border-bottom: 0.5px solid #fef08a;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .content {
-  top: 50%;
   width: 300px;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
+  margin-top: 20px;
+  background-color: #ffffff;
 }
 
 .title {
@@ -221,27 +245,6 @@ input {
   color: #ffffff;
 }
 
-.sign-in-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-
-.maintenance-alert {
-  width: 100%;
-  margin: 0 0 0 0;
-  padding: 0;
-  background-color: #fefce8;
-  border: 0.5px solid #fef08a;
-  border-radius: 1px;
-  position: absolute;
-  top: 50px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-}
-
 .alert-content {
   display: flex;
   gap: 0px;
@@ -333,5 +336,22 @@ input {
 
 .toggle-login a:hover {
   text-decoration: underline;
+}
+
+/* Add media query for mobile devices */
+@media screen and (max-width: 768px) {
+  .sign-in-page {
+    min-height: calc(100vh - 90px);
+    padding-top: 0;
+  }
+
+  .maintenance-alert {
+    position: sticky;
+    top: 0;
+  }
+
+  .content {
+    margin-top: 15px;
+  }
 }
 </style>

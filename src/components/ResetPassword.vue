@@ -1,20 +1,20 @@
 <template>
     <div class="reset-password-page">
-        <div v-if="isValidToken" class="content">
+        <div v-if="currentStep === 'reset-form'" class="content">
             <h1 class="title">Reset Password</h1>
             <div class="input-group">
-                <label for="newPassword">New password</label>
+                <label for="newPassword">New password*</label>
                 <input 
                     id="newPassword" 
                     type="password" 
                     v-model="newPassword"
                     placeholder="Enter new password"
                 >
-                <span class="hint">must contain 8 characters with at least 1 letter, 1 number, and 1 special character</span>
+                <span class="hint">must contain at least 8 characters with at least 1 letter, 1 number, and 1 special character</span>
                 <span class="character-count">{{ newPassword.length }}/32</span>
             </div>
             <div class="input-group">
-                <label for="confirmPassword">Confirm new password</label>
+                <label for="confirmPassword">Confirm new password*</label>
                 <input 
                     id="confirmPassword" 
                     type="password" 
@@ -24,6 +24,12 @@
                 <span class="character-count">{{ confirmPassword.length }}/32</span>
             </div>
             <button class="submit-button" @click="resetPassword">Reset Password</button>
+        </div>
+        <div v-else-if="currentStep === 'reset-success'" class="content success-content">
+            <img src="@/assets/check.svg" alt="Success" />
+            <h2>Password Reset Successful</h2>
+            <p>Your password has been successfully reset</p>
+            <button class="submit-button" @click="goToLogin">Continue to Login</button>
         </div>
         <div v-else class="content invalid-token">
             <h1 class="title">Invalid or Expired Link</h1>
@@ -40,28 +46,31 @@ export default {
         return {
             newPassword: '',
             confirmPassword: '',
-            isValidToken: false
+            isValidToken: false,
+            currentStep: 'reset-form'
         }
     },
     created() {
         // Get token from URL query parameter
         const token = this.$route.query.token;
         
+        // For testing purposes - invalid token
+        if (token === '0001') {
+            this.isValidToken = false;
+            this.currentStep = 'invalid-token';
+            return;
+        }
+
         // For testing purposes - valid token
         if (token === '0000') {
             this.isValidToken = true;
             return;
         }
 
-        // For testing purposes - invalid token
-        if (token === '0001') {
-            this.isValidToken = false;
-            return;
-        }
-
         // Validate token
         if (!token) {
             this.isValidToken = false;
+            this.currentStep = 'invalid-token';
             return;
         }
 
@@ -75,9 +84,13 @@ export default {
         })
         .then(response => {
             this.isValidToken = response.ok;
+            if (!response.ok) {
+                this.currentStep = 'invalid-token';
+            }
         })
         .catch(() => {
             this.isValidToken = false;
+            this.currentStep = 'invalid-token';
         });
     },
     methods: {
@@ -105,8 +118,7 @@ export default {
 
             // For testing purposes
             if (this.newPassword === 'test123#') {
-                alert('Ignoring fetch as this password is used for testing purpose');
-                this.$router.push({ name: 'LoginPage' });
+                this.currentStep = 'reset-success';
                 return;
             }
 
@@ -123,8 +135,7 @@ export default {
             })
             .then(response => {
                 if (response.ok) {
-                    alert('Password reset successful');
-                    this.$router.push({ name: 'LoginPage' });
+                    this.currentStep = 'reset-success';
                 } else {
                     throw new Error('Failed to reset password');
                 }
@@ -133,6 +144,9 @@ export default {
                 console.error('Error resetting password:', error);
                 alert('An error occurred. Please try again later.');
             });
+        },
+        goToLogin() {
+            this.$router.push({ name: 'LoginPage' });
         },
         goToForgotPassword() {
             this.$router.push({ name: 'ForgotPassword' });
@@ -230,6 +244,32 @@ input {
 }
 
 .invalid-token p {
+    color: #666;
+    font-family: "Inter-Regular", Helvetica;
+    font-size: 14px;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.success-content {
+    text-align: center;
+}
+
+.success-content img {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.success-content h2 {
+    color: #333;
+    margin-bottom: 10px;
+    font-family: "Inter-Bold", Helvetica;
+    font-size: 18px;
+}
+
+.success-content p {
     color: #666;
     font-family: "Inter-Regular", Helvetica;
     font-size: 14px;

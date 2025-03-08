@@ -13,6 +13,8 @@ import OTPverify from './components/OTPverify.vue';
 import AccDetails from './components/AccDetails.vue';
 import ForgotPassword from './components/ForgotPassword.vue';
 import ResetPassword from './components/ResetPassword.vue';
+import Vouchers from './components/Vouchers.vue';
+import ClaimVoucher from './components/ClaimVoucher.vue';
 import auth from './services/auth';
 
 Vue.config.productionTip = false;
@@ -23,15 +25,17 @@ const routes = [
     { path: '/', name: 'Home', component: HomePage },
     { path: '/breed/:breedName', name: 'BreedPage', component: BreedPage },
     { path: '/contact-us', name: 'ContactUs', component: ContactUs },
-    { path: '/transactions', name: 'Transactions', component: Transactions, meta: { requiresAuth: true } },
-    { path: '/account', name: 'Account', component: Account, meta: { requiresAuth: true } },
+    { path: '/transactions', name: 'Transactions', component: Transactions },
+    { path: '/account', name: 'Account', component: Account },
     { path: '/cart', name: 'Cart', component: CartPage, meta: { requiresAuth: true } },
     { path: '/login', name: 'LoginPage', component: LoginPage },
     { path: '/signup', name: 'SignUp', component: SignUp },
     { path: '/otp', name: 'OTPverify', component: OTPverify },
     { path: '/account-details', name: 'AccDetails', component: AccDetails },
     { path: '/forgot-password', name: 'ForgotPassword', component: ForgotPassword },
-    { path: '/reset-password', name: 'ResetPassword', component: ResetPassword, props: (route) => ({ token: route.query.token }) }
+    { path: '/reset-password', name: 'ResetPassword', component: ResetPassword, props: (route) => ({ token: route.query.token }) },
+    { path: '/vouchers', name: 'Vouchers', component: Vouchers },
+    { path: '/claim-voucher', name: 'ClaimVoucher', component: ClaimVoucher, meta: { requiresAuth: true } }
 ];
 
 const router = new Router({

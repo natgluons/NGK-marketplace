@@ -24,38 +24,48 @@
 export default {
     name: 'Header',
     methods: {
-
         goBack() {
             if (this.$route.name === 'AccDetails') {
                 this.$router.go(-2);
             } else {
                 this.$router.go(-1);
             }
+        },
+        setActive(index) {
+            this.activeIndex = index;
+        },
+        updateActiveIndex() {
+            const currentPath = this.$route.path;
+            this.activeIndex = this.navItems.findIndex(item => item.to === currentPath);
         }
     },
     data() {
         return {
             activeIndex: null,
             navItems: [
-                // { to: '/cart', icon: require('@/assets/shoppingcart.svg') },
                 {
-                    to: this.isLoggedIn ? '/cart' : '/login',
-                    icon: require('@/assets/shoppingcart.svg'),
-                    // text: 'Cart',
-                    // isPlaceholder: true
+                    to: '/contact-us',
+                    icon: require('@/assets/contactus.svg'),
+                    // text: 'Contact Us'
                 }
             ]
         }
     },
     computed: {
-
         isLoggedIn() {
             // Check if a token exists in localStorage
             return localStorage.getItem('token') !== null;
         }
     },
+    mounted() {
+        this.updateActiveIndex();
+    },
+    watch: {
+        $route() {
+            this.updateActiveIndex();
+        }
+    }
 };
-// };
 </script>
 
 <style scoped>
@@ -75,7 +85,6 @@ export default {
     box-sizing: border-box;
     /* Include padding in the width calculation */
 }
-
 
 .header-item {
     display: flex;

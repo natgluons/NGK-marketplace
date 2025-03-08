@@ -1,6 +1,12 @@
 <template>
     <div class="home-page">
         <div class="div">
+            <div class="service-notice">
+                <div class="notice-content">
+                    <span class="notice-icon">ℹ️</span>
+                    <p class="notice-text">Online purchase is not yet available. <br> Contact us via WhatsApp for orders and inquiries.</p>
+                </div>
+            </div>
             <div class="carousel-banner">
                 <div class="overlap-2">
                     <div class="carousel-container">
@@ -17,10 +23,11 @@
                     </div>
                 </div>
                 <div class="overlap-3">
-                    <h2 class="section-title">Our Puppies</h2>
+                    <h2 class="section-title">Available Puppies Catalog</h2>
+                    <p class="section-description">Meet our puppies! Contact us via WhatsApp to book an appointment.</p>
                     <div class="our-puppies-carousel">
                         <div class="carousel">
-                            <div class="item" v-for="breed in ['Toy Poodle', 'Schnauzer', 'Yorkshire']" :key="breed">
+                            <div class="item" v-for="breed in ['Toy Poodle', 'Schnauzer', 'Yorkie']" :key="breed">
                                 <router-link :to="{ name: 'BreedPage', params: { breedName: breed } }">
                                     <img :src="getBreedImage(breed)" :alt="breed" />
                                     <div class="item-text">{{ breed }}</div>
@@ -29,11 +36,11 @@
                         </div>
                     </div>
                     <h2 class="section-title">Our Other Services</h2>
+                    <p class="section-description">Orders can be placed via WhatsApp. Contact us for more information.</p>
                     <div class="the-essentials">
                         <div class="carousel">
                             <div class="item">
                                 <img src="@/assets/royalcanin.jpg" alt="Dog Food" />
-                                <!-- style="border: 3px solid #E6EDF1;"/> -->
                                 <div class="item-text">Dog Food</div>
                             </div>
                             <div class="item">
@@ -97,7 +104,7 @@ export default {
                 return require('@/assets/toypoodle1.jpg');
             } else if (breed === 'Schnauzer') {
                 return require('@/assets/schnauzer1.jpg');
-            } else if (breed === 'Yorkshire') {
+            } else if (breed === 'Yorkie') {
                 return require('@/assets/yorkie1.jpg');
             }
         },
@@ -179,6 +186,9 @@ export default {
     position: relative;
     margin-right: 0;
     scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .item:last-child {
@@ -186,30 +196,26 @@ export default {
 }
 
 .item img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
     object-fit: cover;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 1;
 }
 
 .item-text {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(255, 255, 255, 0.7);
-    padding: 5px 10px;
-    border-radius: 10px;
+    position: static;
+    transform: none;
+    background-color: transparent;
+    padding: 8px 0;
+    margin-top: 8px;
+    text-align: center;
+    left: auto;
+    bottom: auto;
     font-family: "Inter-Medium", Helvetica;
     font-weight: 500;
     color: #333;
-    font-size: clamp(12px, 3vw, 16px);
-    white-space: nowrap;
-    text-decoration: none;
-    /* Add this to remove underline */
-    display: block;
-    /* Add this to make it a block element */
+    font-size: 14px;
 }
 
 /* Add styles for scrollbar */
@@ -458,5 +464,131 @@ button {
 .fade-enter,
 .fade-leave-to {
     opacity: 0;
+}
+
+.section-title {
+    font-family: "Inter-SemiBold", Helvetica;
+    font-weight: 600;
+    color: #eb221e;
+    text-align: left;
+    font-size: clamp(18px, 5vw, 24px);
+    margin-bottom: 4px;  /* Reduced from previous value to bring the small text closer */
+}
+
+.small-text {
+    font-family: "Inter-Regular", Helvetica;
+    color: #666666;  /* Grey color */
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 16px;  /* Space before the next section */
+}
+
+.service-notice {
+    width: 100%;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+    padding: 6px 0;  /* Reduced padding */
+}
+
+.notice-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;  /* Reduced gap */
+    padding: 0 16px;
+    max-width: 400px;  /* Reduced max-width from 600px */
+    margin: 0 auto;
+}
+
+.notice-icon {
+    font-size: 14px;  /* Reduced from 16px */
+}
+
+.notice-text {
+    color: #495057;
+    font-size: 11px;  /* Reduced from 13px */
+    font-family: "Inter-Regular", Helvetica;
+    margin: 0;
+    text-align: center;
+    line-height: 1.3;  /* Slightly reduced line height */
+}
+
+.section-description {
+    color: #666666;
+    font-size: 12px;  /* Reduced from 14px */
+    font-family: "Inter-Regular", Helvetica;
+    margin: 4px 0 16px 0;
+    text-align: left;  /* Changed from center to left */
+    padding-right: 20px;  /* Added right padding to prevent text overlay */
+    max-width: 90%;  /* Ensure text doesn't stretch too wide */
+}
+
+.our-puppies-carousel .item {
+    flex: 0 0 auto;
+    width: calc(50% - 17px);
+    min-width: 100px;
+    position: relative;
+    margin-right: 0;
+    scroll-snap-align: start;
+}
+
+.our-puppies-carousel .item img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+}
+
+.our-puppies-carousel .item-text {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-family: "Inter-Medium", Helvetica;
+    font-weight: 500;
+    color: #333;
+    font-size: clamp(12px, 3vw, 16px);
+    white-space: nowrap;
+    text-decoration: none;
+    display: block;
+}
+
+.the-essentials .item {
+    flex: 0 0 auto;
+    width: calc(50% - 17px);
+    min-width: 100px;
+    position: relative;
+    margin-right: 0;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.the-essentials .item img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    aspect-ratio: 1;
+}
+
+.the-essentials .item-text {
+    position: static;
+    transform: none;
+    background-color: transparent;
+    padding: 8px 0;
+    margin-top: 8px;
+    text-align: center;
+    left: auto;
+    bottom: auto;
+    font-family: "Inter-Medium", Helvetica;
+    font-weight: 500;
+    color: #333;
+    font-size: 14px;
 }
 </style>

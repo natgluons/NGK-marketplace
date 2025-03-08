@@ -4,7 +4,7 @@
             <h2>Account Details</h2>
             <form @submit.prevent="submitAccountDetails">
                 <div class="form-group">
-                    <label for="username">Username</label>
+                    <label for="username">Username*</label>
                     <input v-model="username" type="text" id="username" required />
                     <div class="hint-count-wrapper">
                         <span class="hint">must contain at least 1 letter, your username can be used as a referral code for others when signing up</span>
@@ -13,17 +13,17 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="password">Password</label>
+                    <label for="password">Password*</label>
                     <input v-model="password" type="password" id="password" required />
                     <div class="hint-count-wrapper">
-                        <span class="hint">must contain 8 characters with at least 1 letter, 1 number, and
+                        <span class="hint">must contain at least 8 characters with at least 1 letter, 1 number, and
                             1 special character</span>
                         <span class="character-count">{{ password.length }}/32</span>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="confirm-password">Confirm password</label>
+                    <label for="confirm-password">Confirm password*</label>
                     <input v-model="confirmPassword" type="password" id="confirm-password" required />
                     <div class="hint-count-wrapper">
                         <span class="character-count">{{ confirmPassword.length }}/32</span>
