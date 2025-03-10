@@ -12,7 +12,8 @@
                     <div class="carousel-container">
                         <transition-group name="fade" tag="div" class="carousel-images">
                             <img v-for="(image, index) in carouselImages" :key="index" :src="image.src" :alt="image.alt"
-                                v-show="currentIndex === index" />
+                                v-show="currentIndex === index" @click="handleImageClick(index)"
+                                :style="index === 0 ? 'cursor: pointer' : ''" />
                         </transition-group>
                         <button class="prev" @click="prevSlide">❮</button>
                         <button class="next" @click="nextSlide">❯</button>
@@ -106,6 +107,11 @@ export default {
                 return require('@/assets/schnauzer1.jpg');
             } else if (breed === 'Yorkie') {
                 return require('@/assets/yorkie1.jpg');
+            }
+        },
+        handleImageClick(index) {
+            if (index === 0) { // Only for the first image (logongk.png)
+                window.location.href = 'https://wa.me/6281234187970';
             }
         },
     },
