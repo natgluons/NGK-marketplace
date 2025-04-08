@@ -1,8 +1,12 @@
 <template>
     <div class="voucher-page">
         <div class="contact-helper">
-            <span>Click the phone button in the header to find our contact info!</span>
-            <div class="arrow-up"></div>
+            <div class="helper-text">
+                <p>Click here</p>
+                <p>to find our</p>
+                <p>contact info!</p>
+            </div>
+            <div class="arrow-up">↑</div>
         </div>
         <div v-if="isLoggedIn">
             <h1>Vouchers</h1>
@@ -49,7 +53,7 @@
             <div class="coming-soon-text">
                 <h3>Coming Soon: Referral Login</h3>
                 <p>We're working on it!</p>
-                <p>Contact us on <a href="https://wa.me/6281234187970" target="_blank" class="whatsapp-link">WhatsApp</a> for now</p>
+                <p>Contact us on <a href="https://wa.me/6281234187970" target="_blank" class="whatsapp-link" style="color: #044484;">WhatsApp</a> for now</p>
             </div>
             <h2>Sign in to view your voucher list</h2>
             <router-link to="/login" class="sign-in-link">Sign in</router-link>
@@ -265,30 +269,32 @@ h1 {
     position: fixed;
     top: 80px;
     right: 10px;
-    background-color: #fff;
-    padding: 12px 18px;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     font-size: 15px;
     color: #f10000;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
     z-index: 100;
-    font-family: 'Comic Sans MS', 'Marker Felt', cursive;
+}
+
+.helper-text {
+    text-align: right;
+    font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
     transform: rotate(-2deg);
-    border: 2px solid #f10000;
+    margin-right: 10px;
+}
+
+.helper-text p {
+    margin: 0;
+    line-height: 1.2;
 }
 
 .arrow-up {
-    width: 0;
-    height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-bottom: 12px solid #f10000;
+    font-size: 40px;
+    line-height: 1;
     position: absolute;
-    bottom: 100%;
-    right: 10px;
+    top: -45px;
+    right: 15px;
 }
 
 .prompt-logo {

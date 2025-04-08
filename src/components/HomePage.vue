@@ -571,10 +571,10 @@ button {
     border-radius: 10px;
     font-family: "Inter-Medium", Helvetica;
     font-weight: 500;
-    color: #333;
+    color: #044484;  /* Changed to blue color */
     font-size: clamp(12px, 3vw, 16px);
     white-space: nowrap;
-    text-decoration: none;
+    text-decoration: underline;  /* Added underline */
     display: block;
 }
 
