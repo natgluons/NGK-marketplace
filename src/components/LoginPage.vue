@@ -136,7 +136,7 @@ export default {
 .maintenance-alert {
   width: 100%;
   margin: 0;
-  padding: 0;
+  padding: 12px 0;
   background-color: #fefce8;
   border-top: 0.5px solid #fef08a;
   border-bottom: 0.5px solid #fef08a;
@@ -247,36 +247,36 @@ input {
 
 .alert-content {
   display: flex;
-  gap: 0px;
   align-items: flex-start;
+  gap: 8px;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 .alert-icon {
   font-size: 20px;
-  padding-left:13px;
+  line-height: 1;
 }
 
 .alert-text {
   flex: 1;
-  padding-left: 5px;
 }
 
 .alert-title {
-  font-family: "Inter-Bold", Helvetica;
-  font-size: 13px;
-  font-weight: 600;
+  font-family: "Inter-SemiBold", Helvetica;
+  font-size: 15px;
   color: #854d0e;
-  margin: 0;
-  padding: 0;
+  margin: 0 0 4px 0;
+  line-height: 1.3;
 }
 
 .alert-description {
   font-family: "Inter-Regular", Helvetica;
-  font-size: 10px;
-  color: #713f12;
-  line-height: 1;
-  margin: 0 0 0 0;
-  padding: 0;
+  font-size: 13px;
+  color: #854d0e;
+  margin: 0;
+  line-height: 1.4;
 }
 
 .forgot-password {

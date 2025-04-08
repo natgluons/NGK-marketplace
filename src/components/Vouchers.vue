@@ -1,5 +1,9 @@
 <template>
     <div class="voucher-page">
+        <div class="contact-helper">
+            <span>Click the phone button in the header to find our contact info!</span>
+            <div class="arrow-up"></div>
+        </div>
         <div v-if="isLoggedIn">
             <h1>Vouchers</h1>
             <div v-if="loading" class="loading">
@@ -249,5 +253,35 @@ h1 {
 .sign-in-link:hover {
     background-color: #eb221e;
     color: #ffffff;
+}
+
+.contact-helper {
+    position: fixed;
+    top: 80px;
+    right: 10px;
+    background-color: #fff;
+    padding: 12px 18px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-size: 15px;
+    color: #f10000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 100;
+    font-family: 'Comic Sans MS', 'Marker Felt', cursive;
+    transform: rotate(-2deg);
+    border: 2px solid #f10000;
+}
+
+.arrow-up {
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 12px solid #f10000;
+    position: absolute;
+    bottom: 100%;
+    right: 10px;
 }
 </style>

@@ -4,7 +4,7 @@
             <div class="service-notice">
                 <div class="notice-content">
                     <span class="notice-icon">ℹ️</span>
-                    <p class="notice-text">Online purchase is not yet available. <br> Contact us via WhatsApp for orders and inquiries.</p>
+                    <p class="notice-text">To ensure the best care and match, puppy purchases are arranged personally—online purchase is only available after agreement. Reach out to us on <a href="https://wa.me/6281234187970" target="_blank">WhatsApp</a> to get started.</p>
                 </div>
             </div>
             <div class="carousel-banner">
