@@ -45,7 +45,7 @@
         <div v-else class="sign-in-prompt">
             <img src="@/assets/logongk.png" alt="NGK Logo" class="prompt-logo" />
             <div class="coming-soon-text">
-                <h3>Coming Soon: Referral Login</h3>
+                <h3>Coming Soon: Account Login</h3>
                 <p>We're working on it!</p>
                 <p>Contact us on <a href="https://wa.me/6281234187970" target="_blank" class="whatsapp-link" style="color: #044484;">WhatsApp</a> for now</p>
             </div>
