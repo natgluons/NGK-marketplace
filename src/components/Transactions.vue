@@ -33,6 +33,12 @@
             </div>
         </div>
         <div v-else class="sign-in-prompt">
+            <img src="@/assets/logongk.png" alt="NGK Logo" class="prompt-logo" />
+            <div class="coming-soon-text">
+                <h3>Coming Soon: Referral Login</h3>
+                <p>We're working on it!</p>
+                <p>Contact us on <a href="https://wa.me/6281234187970" target="_blank" class="whatsapp-link">WhatsApp</a> for now</p>
+            </div>
             <h2>Sign in to view your transaction history</h2>
             <router-link to="/login" class="sign-in-link">Sign in</router-link>
         </div>
@@ -265,5 +271,41 @@ h1 {
     position: absolute;
     bottom: 100%;
     right: 10px;
+}
+
+.prompt-logo {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 1px;
+    object-fit: contain;
+}
+
+.coming-soon-text {
+    margin-bottom: 35px;
+    color: #666;
+}
+
+.coming-soon-text h3 {
+    color: #f10000;
+    font-size: 15px;
+    margin-bottom: 2px;
+    font-family: "Inter-SemiBold", Helvetica;
+}
+
+.coming-soon-text p {
+    font-size: 14px;
+    margin: 2px 0;
+    color: #666;
+    font-family: "Inter-Regular", Helvetica;
+}
+
+.whatsapp-link {
+    color: inherit;
+    text-decoration: underline;
+    font-weight: 700;
+}
+
+.whatsapp-link:hover {
+    opacity: 0.8;
 }
 </style>

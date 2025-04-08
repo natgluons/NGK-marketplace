@@ -25,7 +25,7 @@
                 </div>
                 <div class="overlap-3">
                     <h2 class="section-title">Available Puppies Catalog</h2>
-                    <p class="section-description">Meet our puppies! Contact us via WhatsApp to book an appointment.</p>
+                    <p class="section-description">Meet our puppies! Contact us via <a href="https://wa.me/6281234187970" target="_blank">WhatsApp</a> to book an appointment.</p>
                     <div class="our-puppies-carousel">
                         <div class="carousel">
                             <div class="item" v-for="breed in ['Toy Poodle', 'Schnauzer', 'Yorkie']" :key="breed">
@@ -37,7 +37,7 @@
                         </div>
                     </div>
                     <h2 class="section-title">Our Other Services</h2>
-                    <p class="section-description">Orders can be placed via WhatsApp. Contact us for more information.</p>
+                    <p class="section-description">Orders can be placed via <a href="https://wa.me/6281234187970" target="_blank">WhatsApp</a> or <a href="https://www.tokopedia.com/natashagading1" target="_blank">Tokopedia</a>/<a href="https://shopee.co.id/natashagadingkennel" target="_blank">Shopee</a>. Contact us for more information.</p>
                     <div class="the-essentials">
                         <div class="carousel">
                             <div class="item">
@@ -46,7 +46,22 @@
                             </div>
                             <div class="item">
                                 <img src="@/assets/daycare.png" alt="Dog Hotel/Daycare" />
-                                <div class="item-text">Dog Hotel/Daycare</div>
+                                <div class="item-text">Dog Hotel & Daycare</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="the-essentials">
+                        <div class="carousel">
+                            <div class="item">
+                                <img src="@/assets/supplementsvitamin.jpg" alt="Dog's Vitamins & Supplements" />
+                                <div class="item-text">Dog's Vitamins & Supplements</div>
+                            </div>
+                            <div class="item">
+                                <img src="@/assets/tokopediashopee.png" alt="Tokopedia/Shopee" />
+                                <div class="item-text">
+                                    <a href="https://www.tokopedia.com/natashagading1" target="_blank">Tokopedia</a> /
+                                    <a href="https://shopee.co.id/natashagadingkennel" target="_blank">Shopee</a>
+                                </div>
                             </div>
                         </div>
                     </div>

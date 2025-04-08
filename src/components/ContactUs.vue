@@ -10,27 +10,49 @@
             </div>
             <div class="social-links">
                 <h4>
-                    <img src="@/assets/instagram.svg" alt="Instagram" /> 
-                    <a href="https://www.instagram.com/natashagadingdoghome/">@natashagadingdoghome</a>
+                    <a href="https://www.instagram.com/natashagadingdoghome/" target="_blank" style="display: flex; align-items: center;">
+                        <img src="@/assets/instagram.svg" alt="Instagram" style="margin-right: 8px;" /> 
+                        @natashagadingdoghome
+                    </a>
                 </h4>
                 <h4>
-                    <img src="@/assets/youtube.svg" alt="YouTube" />
-                    <a href="https://www.youtube.com/channel/UCrh3Rw3buz-5cun_Y-zqtEg/search?app=desktop">@NatashaGadingKennel</a>
+                    <a href="https://www.youtube.com/channel/UCrh3Rw3buz-5cun_Y-zqtEg/search?app=desktop" target="_blank" style="display: flex; align-items: center;">
+                        <img src="@/assets/youtube.svg" alt="YouTube" style="margin-right: 8px;" />
+                        @NatashaGadingKennel
+                    </a>
                 </h4>
                 <h4>
-                    <img src="@/assets/tiktok.svg" alt="TikTok" />
-                    <a href="https://www.tiktok.com/@natasha_gading_kennel">@natasha_gading_kennel</a>
+                    <a href="https://www.tiktok.com/@natasha_gading_kennel" target="_blank" style="display: flex; align-items: center;">
+                        <img src="@/assets/tiktok.svg" alt="TikTok" style="margin-right: 8px;" />
+                        @natasha_gading_kennel
+                    </a>
                 </h4>
                 <h4>
-                    <img src="@/assets/logoX.svg" alt="X" />
-                    <a href="https://x.com/NatashaGading">@NatashaGading</a>
+                    <a href="https://x.com/NatashaGading" target="_blank" style="display: flex; align-items: center;">
+                        <img src="@/assets/logoX.svg" alt="X" style="margin-right: 8px;" />
+                        @NatashaGading
+                    </a>
+                </h4>
+                <h4>
+                    <a href="https://www.tokopedia.com/natashagading1" target="_blank" style="display: flex; align-items: center;">
+                        <img src="@/assets/tokopedia.svg" alt="Tokopedia" style="margin-right: 8px;" />
+                        @natashagading1
+                    </a>
+                </h4>
+                <h4>
+                    <a href="https://shopee.co.id/natashagadingkennel" target="_blank" style="display: flex; align-items: center;">
+                        <img src="@/assets/shopee.svg" alt="Shopee" style="margin-right: 8px;" />
+                        @natashagadingkennel
+                    </a>
                 </h4>
             </div>
         </div>
 
         <div class="info-box">
             <div class="info-item">
-                <img src="@/assets/whatsapp.svg" alt="WhatsApp" class="info-icon" />
+                <a href="https://wa.me/6281234187970">
+                    <img src="@/assets/whatsapp.svg" alt="WhatsApp" class="info-icon" />
+                </a>
                 <h3>Contact</h3>
                 <p>For pricing, availability, and visits, contact us on
                     <a href="https://wa.me/6281234187970">WhatsApp</a>
@@ -38,7 +60,9 @@
             </div>
             <div class="divider"></div>
             <div class="info-item">
-                <img src="@/assets/location.svg" alt="Location" class="info-icon" />
+                <a href="https://maps.app.goo.gl/tVk6yXFbF63yUcXx7">
+                    <img src="@/assets/location.svg" alt="Location" class="info-icon" />
+                </a>
                 <h3>Location</h3>
                 <p>Visits available by appointment (booking required!), located in Kelapa Gading, Jakarta Utara. 
                     <a href="https://maps.app.goo.gl/tVk6yXFbF63yUcXx7">View on map</a>
