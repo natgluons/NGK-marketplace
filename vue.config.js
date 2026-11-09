@@ -20,8 +20,9 @@ module.exports = {
     pages: {
       index: {
         entry: 'src/main.js',
+        template: 'public/index.html',
         title: 'natasha gading dog home',
-        favicon: 'src/assets/favicon.ico'  // Updated to .ico
+        favicon: 'src/assets/favicon.ico'
       }
     },
     publicPath: process.env.NODE_ENV === 'production'
